@@ -77,7 +77,7 @@ const login = async (req, res) => {
   if (!req.body.email || !req.body.password)
     return res.status(400).send({ message: "Incomplete data" });
 
-  const userLogin = await user.findOne({ email: req.body.email });
+  const userLogin = await customer.findOne({ email: req.body.email });
   if (!userLogin)
     return res.status(400).send({ message: "Wrong email or password" });
 
@@ -89,7 +89,7 @@ const login = async (req, res) => {
     return res.status(200).json({
       token: jwt.sign(
         {
-          _id: userLogin._id,
+          
           email: userLogin.email,
           password: userLogin.password,
           iat: moment().unix(),
